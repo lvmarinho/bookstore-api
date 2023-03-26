@@ -1,18 +1,33 @@
 package com.leandro.bookstore.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Livro {
-       private Integer id;
-       private String titulo;
-       private String nomeAutor;
-       private String texto;
-       
-       private Categoria categoria;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class Livro implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String titulo;
+	private String nomeAutor;
+	private String texto;
+
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")//varios livros para uma categoria//
+	private Categoria categoria;
 
 	public Livro() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Livro(Integer id, String titulo, String nomeAutor, String texto, Categoria categoria) {
@@ -80,6 +95,5 @@ public class Livro {
 		Livro other = (Livro) obj;
 		return Objects.equals(id, other.id);
 	}
-       
-       
+
 }
