@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leandro.bookstore.domain.Categoria;
+import com.leandro.bookstore.dto.CategoriaDTO;
 import com.leandro.bookstore.repositories.CategoriaRepository;
 
 @Service
@@ -33,6 +34,13 @@ public class CategoriaService {
 		obj.setId(null);
 		return repository.save(obj);
 		
+	}
+
+	public Categoria update(Integer id, CategoriaDTO objDto) {
+	  Categoria obj = findById(id);
+		obj.setNome(objDto.getNome());
+		obj.setDescricao(objDto.getDescricao());
+		return repository.save(obj);
 	}
 
 }
