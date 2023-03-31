@@ -9,44 +9,52 @@ import org.springframework.stereotype.Service;
 import com.leandro.bookstore.domain.Categoria;
 import com.leandro.bookstore.dto.CategoriaDTO;
 import com.leandro.bookstore.repositories.CategoriaRepository;
+import com.leandro.bookstore.service.exeptions.DataIntegrityViolationException;
+import com.leandro.bookstore.service.exeptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
 
 	@Autowired
 	private CategoriaRepository repository;
-	
+
 	CategoriaService(DBService dbservice) {
-    }
+	}
 
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"objeto não encontrado! id: " + id + ", tipo: " + Categoria.class.getName()));
 
 	}
 
 	public List<Categoria> findAll() {
 		return repository.findAll();
 	}
-	
-	
+
 	public Categoria create(Categoria obj) {
 		obj.setId(null);
 		return repository.save(obj);
-		
+
 	}
 
 	public Categoria update(Integer id, CategoriaDTO objDto) {
-	  Categoria obj = findById(id);
+		Categoria obj = findById(id);
 		obj.setNome(objDto.getNome());
 		obj.setDescricao(objDto.getDescricao());
 		return repository.save(obj);
 	}
 
 	public void delete(Integer id) {
-	   findById(id);
-	   repository.deleteById(id);
-		
+		findById(id);
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new com.leandro.bookstore.service.exeptions.DataIntegrityViolationException(
+					"Categoria não pode ser deletado, pois possui livros associados");
+
+		}
+
 	}
 
 }
