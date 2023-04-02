@@ -11,7 +11,7 @@ import com.leandro.bookstore.repositories.CategoriaRepository;
 import com.leandro.bookstore.repositories.LivroRepository;
 
 @Service
-public class DBService { //classe que instância a base de dados//
+public class DBService { 
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -34,8 +34,8 @@ public class DBService { //classe que instância a base de dados//
 		cat1.getLivros().addAll(Arrays.asList(l1, l2));
 		cat2.getLivros().addAll(Arrays.asList(l3, l4, l5));
 
-		categoriaRepository.saveAllAndFlush(Arrays.asList(cat1, cat2, cat3));
-		livroRepository.saveAllAndFlush(Arrays.asList(l1, l2, l3, l4, l5));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		livroRepository.saveAll(Arrays.asList(l1, l2, l3, l4, l5));
 
 	}
 
