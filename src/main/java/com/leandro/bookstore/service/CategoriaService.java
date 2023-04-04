@@ -20,13 +20,12 @@ public class CategoriaService {
 
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"objeto não encontrado! id: " + id + ", tipo: " + Categoria.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("objeto não encontrado!"));
 
 	}
 
 	public List<Categoria> findAll() {
-		return (List<Categoria>) repository.findAll();
+		return repository.findAll();
 	}
 
 	public Categoria create(Categoria obj) {
@@ -46,9 +45,9 @@ public class CategoriaService {
 		findById(id);
 		try {
 			repository.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
 			throw new com.leandro.bookstore.service.exeptions.DataIntegrityViolationException(
-					"Categoria não pode ser deletado, pois possui livros associados");
+					"Categoria não pode ser deletada, pois possui livros associados");
 
 		}
 

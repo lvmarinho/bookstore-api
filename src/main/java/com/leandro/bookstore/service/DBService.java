@@ -11,7 +11,7 @@ import com.leandro.bookstore.repositories.CategoriaRepository;
 import com.leandro.bookstore.repositories.LivroRepository;
 
 @Service
-public class DBService { 
+public class DBService {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;

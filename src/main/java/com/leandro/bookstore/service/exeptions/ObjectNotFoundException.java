@@ -1,8 +1,7 @@
 package com.leandro.bookstore.service.exeptions;
 
-public class ObjectNotFoundException extends RuntimeException{
+public class ObjectNotFoundException extends RuntimeException {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	public ObjectNotFoundException(String message, Throwable cause) {
@@ -14,6 +13,5 @@ public class ObjectNotFoundException extends RuntimeException{
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	
 
 }

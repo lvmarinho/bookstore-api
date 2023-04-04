@@ -1,6 +1,5 @@
 package com.leandro.bookstore.resources.exceptions;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,8 +12,9 @@ import jakarta.servlet.ServletRequest;
 @ControllerAdvice
 public class ResourcesExceptionHandler {
 
-	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException e, ServletRequest request) {
+	@ExceptionHandler(com.leandro.bookstore.service.exeptions.ObjectNotFoundException.class)
+	public ResponseEntity<StandardError> objectNotFoundException(
+			com.leandro.bookstore.service.exeptions.ObjectNotFoundException e, ServletRequest request) {
 		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
 				e.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);

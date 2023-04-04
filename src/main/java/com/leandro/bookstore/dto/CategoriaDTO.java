@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.leandro.bookstore.domain.Categoria;
 
+
 public class CategoriaDTO implements Serializable{
 
 	

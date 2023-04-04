@@ -46,11 +46,12 @@ public class CategoriaResource {
 	}
 
 	// método responsável por salvar //
+	
 	@PostMapping
 	public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created((URI) uri).body(obj);
+		return ResponseEntity.created(uri).build();
 
 	}
 	// metodo responsavel por editar (Update)//
