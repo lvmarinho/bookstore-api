@@ -17,8 +17,9 @@ public class LivroService {
 
 	public Livro findById(Integer id) {
 		Optional<Livro> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"objeto não encontrado! id: " + id + ", tipo: " + Livro.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException
+				("objeto não encontrado!"));
 
+				
 	}
 }
