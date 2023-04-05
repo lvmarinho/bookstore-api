@@ -1,5 +1,6 @@
 package com.leandro.bookstore.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,12 @@ public class LivroService {
 
 	public Livro findById(Integer id) {
 		Optional<Livro> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException
-				("objeto não encontrado!"));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("objeto não encontrado!"));
 
-				
 	}
+
+	public List<Livro> findAll() {
+		return repository.findAll();
+	}
+
 }
