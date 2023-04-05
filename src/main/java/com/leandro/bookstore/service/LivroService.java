@@ -25,5 +25,12 @@ public class LivroService {
 	public List<Livro> findAll() {
 		return repository.findAll();
 	}
+	
+	public Livro create(Livro obj) {
+		obj.setId(null);
+		return repository.save(obj);
+
+	}
+
 
 }
